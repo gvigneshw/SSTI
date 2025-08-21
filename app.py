@@ -8,7 +8,11 @@ FLAG = "ctf{fnl3tq92bfla}"
 def index():
     name = request.args.get('name', '')
     template = f"Hello {name}!"
-    return render_template_string(template)
+    # Pass FLAG in global context to enable access via globals()
+    context = {
+        "FLAG": FLAG
+    }
+    return render_template_string(template, **context)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
